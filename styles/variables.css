@@ -1,1 +1,17 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+:root{
+    --main-font: 'Inter-Variable';
+    --accent-font: 'PressStart2P';
+    --title-bold: 700;
+    --text-bold: 400;
+    --background-color: rgb(255, 255, 255);
+    --accent-color-first: #d3d3d3;/*цвет начала градиента*/
+    --accent-color-second: #e7e7e7;
+    --accent-color-third: #1a1a1a;
+    --text-color: rgb(0, 0, 0);
+    --highlight-color: rgb(0, 0, 0);
+    --watermark-stroke-panel:var(--background-color);
+    --button-text-color: #fff;
+    --heart-contour-color: var(--text-color);
+    --heart-sparks-color: #FF0000;
+}
