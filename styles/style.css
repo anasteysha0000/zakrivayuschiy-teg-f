@@ -348,7 +348,7 @@ dialog::backdrop {
   gap: 30px;
 }
 .dialog-window:is([open]) {
-  border: none;
+  border: 2px solid var(--text-color);
   background-color: var(--background-color);
   width: clamp(21.3125rem, 20.9642rem + 1.4981vw, 22.3125rem);
   min-height: 191px;
@@ -386,6 +386,7 @@ dialog::backdrop {
   height: 38px;
   border: 2px solid var(--text-color);
   background-color: var(--background-color);
+  cursor: pointer;
 }
 .dialog-window-close-text {
   line-height: 90%;

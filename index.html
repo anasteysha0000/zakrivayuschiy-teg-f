@@ -498,13 +498,13 @@
         aria-controls="dialog-id"
         class="button-floppy button">
             <svg class="floppy">
-              <use href=#floppy />
+              <use href="./svg/floppy.svg#floppy" />
             </svg>
             <span class="button__text">Сохранить на память</span>
         </button>
 
         <dialog id="dialog-id" class="dialog-window">
-          <div class="dialog-window-container">
+          <form method="dialog" class="dialog-window-container">
             <div class="dialog-window-content">
             <svg class="dialog-window-floppy">
               <use href=#floppy />
@@ -517,7 +517,7 @@
             onclick="window['dialog-id'].close()">
              <span class="dialog-window-close-text">ок</span>
             </button>
-          </div>
+          </form>
         </dialog> 
     </footer>
     <script src="./scripts/like.js"></script>
