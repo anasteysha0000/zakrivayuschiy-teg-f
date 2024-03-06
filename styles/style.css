@@ -151,6 +151,27 @@
   inline-size: 100%;
   min-height: 696px;
 }
+.brightness {
+  filter: brightness(200%);
+}
+.contrast {
+  filter: contrast(20%);
+}
+.blur {
+  filter: blur(3.2rem);
+}
+.opacity {
+  filter: opacity(0.8);
+}
+.grayscale {
+  filter: grayscale(0.8);
+}
+.saturate {
+  filter: saturate(158%);
+}
+.hue-rotate {
+  filter: hue-rotate(-90deg);
+}
 .section-image-container {
   position: relative;
 }
@@ -173,6 +194,9 @@
   .watermark {
     -webkit-text-stroke: 1px var(--watermark-stroke-panel);
   }
+}
+.text-transform {
+  text-transform: lowercase;
 }
 .section-subtitle-container {
   display: flex;
