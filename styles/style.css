@@ -152,16 +152,16 @@
   min-height: 696px;
 }
 .brightness {
-  filter: brightness(200%);
+  filter: brightness(200%) contrast(20%);
 }
 .contrast {
   filter: contrast(20%);
 }
 .blur {
-  filter: blur(3.2rem);
+  filter: blur(3.2rem) opacity(0.8);
 }
 .opacity {
-  filter: opacity(0.8);
+  filter: opacity(0.8) grayscale(0.8);
 }
 .grayscale {
   filter: grayscale(0.8);
@@ -216,7 +216,6 @@
   padding-block-start: 2px;
   gap: 7px;
   padding-block-end: 25px;
-  padding-block-start: 2px;
   padding-inline-end: 23px;
 }
 .card__like-button {
@@ -415,15 +414,13 @@ dialog::backdrop {
   }
   .button_like {
     padding-inline-start: 0px;
+    padding-block-start: 0px;
   }
   .button-floppy {
     flex-direction: column;
   }
   .watermark {
     inset-inline-end: 9px;
-  }
-  .button_like {
-    padding-block-start: 0px;
   }
   .dialog-window-content {
     padding-inline-start: 25px;
