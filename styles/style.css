@@ -20,18 +20,9 @@
   font-variation-settings: "wght" var(--text-bold);
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: var(---main-font);
+  font-family: var(--main-font);
   background-size: cover;
-  background-image: repeating-linear-gradient(
-      var(--accent-color-first),
-      transparent 2px
-    ),
-    repeating-linear-gradient(90deg, var(--accent-color-first), transparent 2px),
-    linear-gradient(
-      180deg,
-      var(--accent-color-second) 0.01%,
-      var(--accent-color-third)
-    );
+  background-image: var(--background-image);
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
@@ -49,7 +40,7 @@
 }
 
 .decorated-zone {
-  border: 2px solid #000;
+  border: 2px solid var(--text-color);
   background-color: var(--background-color);
 }
 .header-container {
@@ -59,13 +50,13 @@
   gap: 20px;
 }
 .header-title {
-  font-family: var(--accent-font, monospace);
+  font-family: var(--accent-font);
   text-transform: uppercase;
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
   color: var(--text-color);
 }
 .header-subtitle {
-  font-family: var(--accent-font, monospace);
+  font-family: var(--accent-font);
   text-transform: uppercase;
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
   color: var(--text-color);
@@ -96,7 +87,6 @@
 }
 .theme-menu__button:disabled {
   opacity: 0.6;
-  position: relative;
   pointer-events: none;
 }
 .theme-menu__button:disabled::before {
@@ -104,19 +94,18 @@
   position: absolute;
   inset-inline-end: 97px;
   color: var(--highlight-color);
-  animation-name: marker-disabled-button;
   animation: marker-disabled-button 0.5s infinite ease-in-out alternate;
 }
 .theme-menu__button::after {
   content: "";
   display: block;
   position: absolute;
-  width: 0%;
+  width: 85%;
   height: 2px;
   background-color: var(--text-color);
-  scale: 0;
-  margin-inline-start: 2px;
-  transition: scale 0.5s;
+  inset-inline-start: 6px;
+  transform: scale(0, 1);
+  transition: transform 0.3s ease;
   transform-origin: left;
   right: 8px;
 }
@@ -129,8 +118,7 @@
   opacity: 0.6;
 }
 .theme-menu__button:focus-visible::after {
-  width: 82%;
-  scale: 1;
+  transform: scale(1, 1);
 }
 /*основная секция*/
 .main-section {
@@ -145,11 +133,11 @@
   font-size: 18px;
   font-variation-settings: "wght" var(--title-bold);
   padding: 5px 9px;
-  border-bottom: 2px solid #000;
 }
 .image {
   inline-size: 100%;
   min-height: 696px;
+  object-fit: cover;
 }
 .brightness {
   filter: brightness(200%) contrast(20%);
@@ -174,6 +162,9 @@
 }
 .section-image-container {
   position: relative;
+  border-bottom: 2px solid var(--text-color);
+  border-top: 2px solid var(--text-color);
+  max-height: 700px;
 }
 .watermark {
   font-family: var(--accent-font);
@@ -186,13 +177,13 @@
   inset-block-start: 25px;
   opacity: 0.5;
   color: var(--text-color);
-  text-shadow: -1px 0 var(--watermark-stroke-panel),
-    0 1px var(--watermark-stroke-panel), 1px 0 var(--watermark-stroke-panel),
-    0 -1px var(--watermark-stroke-panel);
+  text-shadow: -1px 0 var(--watermark-stroke-panel), 0 1px var(--watermark-stroke-panel), 1px 0 var(--watermark-stroke-panel), 0 -1px var(--watermark-stroke-panel);
 }
-@supports (-webkit-text-stroke: 1px var(--watermark-stroke-panel)) {
+@supports ((-webkit-text-stroke: 1px var(--watermark-stroke-panel)) or (text-stroke: 1px var(--watermark-stroke-panel))) {
   .watermark {
-    -webkit-text-stroke: 1px var(--watermark-stroke-panel);
+      -webkit-text-stroke: 1px var(--watermark-stroke-panel);
+      text-stroke: 1px var(--watermark-stroke-panel);
+      text-shadow: none;
   }
 }
 .text-transform {
@@ -222,6 +213,8 @@
   inline-size: 130px;
   block-size: 38px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button {
   background-color: var(--background-color);
@@ -229,8 +222,6 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  align-items: center;
-  justify-content: center;
 }
 .button::before {
   content: "";
@@ -239,7 +230,7 @@
   width: 100%;
   height: 100%;
   background-color: var(--text-color);
-  translate: -100%;
+  transform: translateX(-100%);
   transition: translate 0.5s ease-in-out;
   inset-inline-start: 0px;
   inset-block-start: 0px;
@@ -258,6 +249,11 @@
   font-size: 14px;
   line-height: 90%;
   color: var(--button-text-color);
+  white-space: nowrap;
+}
+.like-icon {
+  width: 39px;
+  height: 34px;
 }
 .sparks {
   opacity: 0;
@@ -265,10 +261,12 @@
 /*состояния основной секции*/
 .button:focus {
   outline: none;
+}
+.button:focus-visible {
   box-shadow: 2px 2px 0px 0px var(--text-color);
 }
 .button:hover::before {
-  translate: 0;
+  transform: translateX(0);
 }
 .condition:focus {
   border: none;
@@ -285,6 +283,10 @@
 .like-icon .main-body {
   fill: transparent;
   transition: fill 0.3s linear;
+}
+.like-icon .contour {
+  fill: var(--text-color);
+  transition: fill 0.1s linear;
 }
 /*состояния сердца*/
 .like-icon:hover .core {
@@ -316,11 +318,11 @@
   transition: fill 0.3s 0.06s linear;
 }
 .like-icon.is-liked .heart {
-  animation: heart 0.3s 0.1s ease-in alternate;
+  animation: heart 0.3s 0.1s ease-in 1 alternate;
   transform-origin: center;
 }
 .like-icon.is-liked .sparks {
-  animation: sparks 0.3s 0.3s ease-in alternate;
+  animation: sparks 0.3s 0.3s ease-in 1 alternate;
 }
 /*кнопка "Сохранить на память*/
 .button-floppy {
@@ -332,8 +334,10 @@
   border: 2px solid var(--text-color);
 }
 .floppy {
-  width: 21px;
-  height: 21px;
+  max-width: 21px;
+  max-height: 21px;
+  inline-size: 100%;
+  block-size: 100%;
   color: var(--button-text-color);
   mix-blend-mode: difference;
 }
@@ -368,8 +372,10 @@ dialog::backdrop {
   padding-inline-start: 17px;
 }
 .dialog-window-floppy {
-  width: 39px;
-  height: 39px;
+  max-width: 39px;
+  max-height: 39px;
+  inline-size: 100%;
+  block-size: 100%;
   color: var(--text-color);
   flex-shrink: 0;
 }
@@ -384,15 +390,9 @@ dialog::backdrop {
 .dialog-window-close {
   width: clamp(16.0625rem, 15.2702rem + 3.3803vw, 18.3125rem);
   height: 38px;
-  border: 2px solid var(--text-color);
-  background-color: var(--background-color);
-  cursor: pointer;
 }
 .dialog-window-close-text {
   line-height: 90%;
-  font-family: var(--accent-font);
-  font-size: 14px;
-  color: var(--text-color);
   text-transform: uppercase;
 }
 /*футер*/
@@ -402,28 +402,31 @@ dialog::backdrop {
 @media (width <= 375.5px) {
   /*поправить в итоге на 375*/
   .header {
-    width: 100%;
+      width: 100%;
   }
   .section-title {
-    padding: 3px 8px;
+      padding: 3px 8px;
   }
   .padding {
-    padding: 0px 28.75px 0px 0px;
+      padding: 0px 28.75px 0px 0px;
   }
   .image {
-    min-height: 375px;
+      min-height: 375px;
   }
   .button_like {
-    padding-inline-start: 0px;
-    padding-block-start: 0px;
+      padding-inline-start: 0px;
+      padding-block-start: 0px;
   }
   .button-floppy {
-    flex-direction: column;
+      flex-direction: column;
   }
   .watermark {
-    inset-inline-end: 9px;
+      inset-inline-end: 9px;
   }
   .dialog-window-content {
-    padding-inline-start: 25px;
+      padding-inline-start: 25px;
+  }
+  .section-image-container {
+      max-height: 379px;
   }
 }
